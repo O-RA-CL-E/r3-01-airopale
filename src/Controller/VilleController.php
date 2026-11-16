@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Ville;
+use App\Meteo\ClientMeteo;
 
 #[Route('/villes')]
 class VilleController extends AbstractController
@@ -20,10 +21,13 @@ class VilleController extends AbstractController
     }
 
     #[Route('/{id}', name: 'ville_fiche', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function fiche(Ville $ville): Response
+    public function fiche(Ville $ville, ClientMeteo $clientMeteo): Response
     {
+        $meteo = $clientMeteo->meteoActuelle($ville);
+
         return $this->render('ville/fiche.html.twig', [
             'ville' => $ville,
+            'meteo' => $meteo,
         ]);
     }
 }

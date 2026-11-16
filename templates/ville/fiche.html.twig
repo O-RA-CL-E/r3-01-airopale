@@ -8,4 +8,19 @@
     <h1>{{ ville.nom }}</h1>
 
     <p class="discret">Latitude {{ ville.latitude }} · longitude {{ ville.longitude }}</p>
+
+    <div class="cartes">
+        <section class="carte">
+            <h2>Météo</h2>
+
+            <p class="grand">{{ meteo.temperature }} °C</p>
+
+            <p>
+                {{ meteo.libelle }} · vent {{ meteo.vent }} km/h
+                {% if meteo.vent > 50 %}· <strong>vent fort</strong>{% endif %}
+            </p>
+
+            <p class="discret">Mesure de {{ meteo.heure|date('H:i') }}</p>
+        </section>
+    </div>
 {% endblock %}
