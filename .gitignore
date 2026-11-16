@@ -8,3 +8,12 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+# Sujets de TP (documents de l'enseignant, hors projet)
+S7_TP_*
+
+# Fichiers système / éditeur
+Thumbs.db
+desktop.ini
+.DS_Store
+.idea/
