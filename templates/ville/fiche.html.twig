@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ville.nom }} — AirOpale{% endblock %}
+
+{% block body %}
+    <p><a href="{{ path('ville_liste') }}">← Toutes les villes</a></p>
+
+    <h1>{{ ville.nom }}</h1>
+
+    <p class="discret">Latitude {{ ville.latitude }} · longitude {{ ville.longitude }}</p>
+{% endblock %}
