@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les villes — AirOpale{% endblock %}
+
+{% block body %}
+    <h1>Les villes</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Ville</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ville in villes %}
+                <tr>
+                    <td>{{ ville.nom }}</td>
+                    <td>{{ ville.latitude }}</td>
+                    <td>{{ ville.longitude }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p>{{ villes|length }} ville{{ villes|length > 1 ? 's' }}</p>
+{% endblock %}
