@@ -17,3 +17,6 @@ Thumbs.db
 desktop.ini
 .DS_Store
 .idea/
+
+# Migrations
+migrations/*.php
