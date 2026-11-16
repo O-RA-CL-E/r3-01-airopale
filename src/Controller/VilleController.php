@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Ville;
 use App\Meteo\ClientMeteo;
+use App\Meteo\NiveauAir;
 
 #[Route('/villes')]
 class VilleController extends AbstractController
@@ -24,10 +25,13 @@ class VilleController extends AbstractController
     public function fiche(Ville $ville, ClientMeteo $clientMeteo): Response
     {
         $meteo = $clientMeteo->meteoActuelle($ville);
+        $air = $clientMeteo->qualiteAir($ville);
 
         return $this->render('ville/fiche.html.twig', [
             'ville' => $ville,
             'meteo' => $meteo,
+            'air' => $air,
+            'niveau' => NiveauAir::depuisIndice($air['indice']),
         ]);
     }
 }

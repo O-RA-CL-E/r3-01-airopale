@@ -39,4 +39,29 @@ final class ClientMeteo
             'libelle' => CodeMeteo::libelle((int) $actuel['weather_code']),
         ];
     }
+
+        /**
+     * @return array{heure: string, indice: int, pm25: float, pm10: float, no2: float}
+     */
+    public function qualiteAir(Ville $ville): array
+    {
+        $reponse = $this->client->request('GET', $this->urlAir . '/v1/air-quality', [
+            'query' => [
+                'latitude' => $ville->getLatitude(),
+                'longitude' => $ville->getLongitude(),
+                'current' => 'european_aqi,pm2_5,pm10,nitrogen_dioxide',
+                'timezone' => 'Europe/Paris',
+            ],
+        ]);
+
+        $actuel = $reponse->toArray()['current'];
+
+        return [
+            'heure' => $actuel['time'],
+            'indice' => (int) $actuel['european_aqi'],
+            'pm25' => (float) $actuel['pm2_5'],
+            'pm10' => (float) $actuel['pm10'],
+            'no2' => (float) $actuel['nitrogen_dioxide'],
+        ];
+    }
 }

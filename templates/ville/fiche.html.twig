@@ -11,16 +11,20 @@
 
     <div class="cartes">
         <section class="carte">
-            <h2>Météo</h2>
-
-            <p class="grand">{{ meteo.temperature }} °C</p>
+            <h2>Qualité de l'air</h2>
 
             <p>
-                {{ meteo.libelle }} · vent {{ meteo.vent }} km/h
-                {% if meteo.vent > 50 %}· <strong>vent fort</strong>{% endif %}
+                <span class="badge badge-{{ niveau.classe }}">{{ niveau.libelle }}</span>
+                indice européen {{ air.indice }}
             </p>
 
-            <p class="discret">Mesure de {{ meteo.heure|date('H:i') }}</p>
+            <p>
+                PM2.5 : {{ air.pm25 }} µg/m³<br>
+                PM10 : {{ air.pm10 }} µg/m³<br>
+                NO₂ : {{ air.no2 }} µg/m³
+            </p>
+
+            <p class="discret">Mesure de {{ air.heure|date('H:i') }}</p>
         </section>
     </div>
 {% endblock %}
